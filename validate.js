@@ -4,10 +4,9 @@ var argv     = require('minimist')(process.argv.slice(2))
   , fs       = Promise.promisifyAll(require('fs'))
 ;
 
-function isSmaller(a, b) {
-  if(a > b) return false;
-  return true;
-};
+function isSmaller ( prev, current ) {
+  return Number(prev) <= Number(current);
+}
 
 // main
 var input = argv.i || argv.input || null;
@@ -20,7 +19,6 @@ var prev    = null
   , count   = 0
   , isValid = true
 ;
-console.log(increase);
 
 var rl = readline.createInterface({
   input: fileStream
@@ -35,7 +33,7 @@ rl.on('line', function (num) {
 
   if(prev !== null && current !== null) {
     if(isValid) {
-      isValid = increase? isSmaller(prev, current): !isSmaller(prev, current);
+      isValid = increase? isSmaller(prev, current): isSmaller(current, prev);
     }else {
       rl.close();
     }
@@ -46,6 +44,7 @@ rl.on('line', function (num) {
 rl.on('close', function () {
   if(isValid) {
     console.log('檔案驗證結果：[通過]');
+    console.log('總行數：', count);
   }else {
     console.log('檔案驗證結果：[不通過]');
     console.log('在 %s 行附近出錯', count-1);
