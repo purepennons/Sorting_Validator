@@ -9,6 +9,10 @@ Just a tool to test a sorting list is correct or not.
 
 
 # Params
+`-i`: Setting input file.
+
+`--input`: Same as `-i`.
+
 `--inc`(default): Sorting by samll to large.
 
 `--dec`: Sorting by large to samll.
