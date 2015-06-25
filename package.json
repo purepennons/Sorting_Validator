@@ -1,6 +1,6 @@
 {
   "name": "validate_sorting",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "preferGlobal": true,
   "description": "Just a tool to test a sorting list is correct or not.",
   "dependencies": {
