@@ -5,8 +5,7 @@ Just a tool to test a sorting list is correct or not.
 	npm install -g validate_sorting
 
 # Usage
-	node entry.js --inc -i <input file>
-
+	sortv --inc -i <input file>
 
 # Params
 `-i`: Setting input file.
