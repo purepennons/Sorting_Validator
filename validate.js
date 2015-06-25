@@ -10,13 +10,13 @@ function isSmaller ( prev, current ) {
 
 // main
 (function () {
-  var input = (argv.i || argv.input || null).toString();
+  var input = argv.i || argv.input || null;
   var increase = !!(!argv.dec || argv.inc);
 
   console.log('Test %s', input);
 
   if(input) {
-    var fileStream = fs.createReadStream(input);
+    var fileStream = fs.createReadStream(input.toString());
 
     var prev    = null
       , current = null
