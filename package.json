@@ -1,11 +1,10 @@
 {
   "name": "validate_sorting",
   "version": "1.0.0",
+  "preferGlobal": true,
   "description": "Just a tool to test a sorting list is correct or not.",
-  "main": "entry.js",
   "dependencies": {
     "babel": "^5.6.6",
-    "bluebird": "^2.9.30",
     "minimist": "^1.1.1"
   },
   "devDependencies": {},
@@ -16,10 +15,13 @@
     "type": "git",
     "url": "git+https://github.com/purepennons/Sorting_Validator.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Chiahao Lin",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/purepennons/Sorting_Validator/issues"
   },
-  "homepage": "https://github.com/purepennons/Sorting_Validator#readme"
+  "homepage": "https://github.com/purepennons/Sorting_Validator#readme",
+  "bin": {
+    "sortv": "entry.js"
+  }
 }
