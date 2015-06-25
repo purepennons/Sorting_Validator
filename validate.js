@@ -9,44 +9,62 @@ function isSmaller ( prev, current ) {
 }
 
 // main
-var input = argv.i || argv.input || null;
-var increase = !!(!argv.dec || argv.inc);
+(function () {
+  var input = (argv.i || argv.input || null).toString();
+  var increase = !!(!argv.dec || argv.inc);
 
-var fileStream = fs.createReadStream(input);
+  console.log('Test %s', input);
 
-var prev    = null
-  , current = null
-  , count   = 0
-  , isValid = true
-;
+  if(input) {
+    var fileStream = fs.createReadStream(input);
 
-var rl = readline.createInterface({
-  input: fileStream
-});
+    var prev    = null
+      , current = null
+      , count   = 0
+      , isValid = true
+    ;
 
-rl.on('line', function (num) {
+    var rl = readline.createInterface({
+      input: fileStream
+    });
 
-  count++;
+    // readline events
+    rl.on('line', function (num) {
 
-  prev = current;
-  current = num;
+      count++;
 
-  if(prev !== null && current !== null) {
-    if(isValid) {
-      isValid = increase? isSmaller(prev, current): isSmaller(current, prev);
-    }else {
-      rl.close();
-    }
-  }
+      prev = current;
+      current = num;
 
-});
+      if(prev !== null && current !== null) {
+        if(isValid) {
+          isValid = increase? isSmaller(prev, current): isSmaller(current, prev);
+        }else {
+          rl.close();
+        }
+      }
 
-rl.on('close', function () {
-  if(isValid) {
-    console.log('檔案驗證結果：[通過]');
-    console.log('總行數：', count);
+    });
+
+    rl.on('close', function () {
+      if(isValid) {
+        console.log('Result：[Pass]');
+        console.log('Total lines：', count);
+      }else {
+        console.log('Result：[Not Pass]');
+        console.log('Detect error at line %s', count-1);
+      }
+      return;
+    });
+
+    // readStream events
+    fileStream.on('error', function () {
+      console.log('%s is not exist.', input);
+      return;
+    });
+
   }else {
-    console.log('檔案驗證結果：[不通過]');
-    console.log('在 %s 行附近出錯', count-1);
+    console.log('Without input file');
+    return;
   }
-});
+})();
